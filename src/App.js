@@ -17,15 +17,15 @@ export class App extends Component {
 
   onLeaveFeedback = event => {
     this.setState(prevState => {
-      const buttonText = event.target.textContent;
+      const buttonName = event.target.name;
       const { good, neutral, bad } = prevState;
 
-      switch (buttonText) {
-        case 'Good':
+      switch (buttonName) {
+        case 'good':
           return { good: good + 1 };
-        case 'Neutral':
+        case 'neutral':
           return { neutral: neutral + 1 };
-        case 'Bad':
+        case 'bad':
           return { bad: bad + 1 };
         default:
           throw new Error();
@@ -44,28 +44,37 @@ export class App extends Component {
   };
 
   render() {
+    const {
+      state,
+      onLeaveFeedback,
+      countTotalFeedback,
+      countPositiveFeedbackPercentage,
+    } = this;
     const { good, neutral, bad } = this.state;
     const { initialValue } = this.props;
+    const totalFeedback = countTotalFeedback();
+    const positivePercentage = countPositiveFeedbackPercentage();
 
     return (
       <Box width="500px" color="text" fontSize={4} as="header" p="0px 30px">
         <Section title="Please leave feedback">
-          <FeedbackOptions onLeaveFeedback={this.onLeaveFeedback} />
+          <FeedbackOptions
+            options={Object.keys(state)}
+            onLeaveFeedback={onLeaveFeedback}
+          />
         </Section>
 
         <Section title="Statistics">
-          {!this.countTotalFeedback() ? (
+          {!totalFeedback ? (
             <Notification message="There is no feedback"></Notification>
           ) : (
             <Statistics
               good={good}
               neutral={neutral}
               bad={bad}
-              total={this.countTotalFeedback()}
+              total={totalFeedback}
               positivePercentage={
-                isNaN(this.countPositiveFeedbackPercentage())
-                  ? initialValue
-                  : this.countPositiveFeedbackPercentage()
+                isNaN(positivePercentage) ? initialValue : positivePercentage
               }
             />
           )}
