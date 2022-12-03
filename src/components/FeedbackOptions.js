@@ -13,7 +13,7 @@ export const FeedbackOptions = ({ options, onLeaveFeedback }) => (
           name={option}
           variant={option}
           key={option}
-          onClick={onLeaveFeedback}
+          onClick={() => onLeaveFeedback(option)}
         >
           {capitalisedOption}
         </Box>

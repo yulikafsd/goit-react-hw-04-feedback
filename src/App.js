@@ -1,36 +1,17 @@
 import { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Box } from 'styles';
 import { Section, FeedbackOptions, Statistics, Notification } from 'components';
 
 export class App extends Component {
-  static defaultProps = {
-    initialValue: 0,
-  };
-
-  static propTypes = {};
-
   state = {
-    good: this.props.initialValue,
-    neutral: this.props.initialValue,
-    bad: this.props.initialValue,
+    good: 0,
+    neutral: 0,
+    bad: 0,
   };
 
-  onLeaveFeedback = event => {
+  onLeaveFeedback = name => {
     this.setState(prevState => {
-      const buttonName = event.target.name;
-      const { good, neutral, bad } = prevState;
-
-      switch (buttonName) {
-        case 'good':
-          return { good: good + 1 };
-        case 'neutral':
-          return { neutral: neutral + 1 };
-        case 'bad':
-          return { bad: bad + 1 };
-        default:
-          throw new Error();
-      }
+      return { [name]: prevState[name] + 1 };
     });
   };
 
@@ -83,7 +64,3 @@ export class App extends Component {
     );
   }
 }
-
-App.propTypes = {
-  initialValue: PropTypes.number.isRequired,
-};
