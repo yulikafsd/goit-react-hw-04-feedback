@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { Box } from 'styles';
 
 export const Section = ({ title, children }) => (
@@ -8,3 +10,7 @@ export const Section = ({ title, children }) => (
     {children}
   </Box>
 );
+
+Section.propTypes = {
+  title: PropTypes.string.isRequired,
+};

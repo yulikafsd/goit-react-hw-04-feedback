@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { Box } from 'styles';
 
 export const Statistics = ({
@@ -30,3 +32,11 @@ export const Statistics = ({
     </Box>
   </Box>
 );
+
+Statistics.propTypes = {
+  good: PropTypes.number.isRequired,
+  neutral: PropTypes.number.isRequired,
+  bad: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  positivePercentage: PropTypes.number.isRequired,
+};

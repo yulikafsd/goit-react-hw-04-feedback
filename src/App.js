@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Box } from 'styles';
 import { Section, FeedbackOptions, Statistics, Notification } from 'components';
 
@@ -65,7 +66,6 @@ export class App extends Component {
             onLeaveFeedback={onLeaveFeedback}
           />
         </Section>
-
         <Section title="Statistics">
           {!totalFeedback ? (
             <Notification message="There is no feedback"></Notification>
@@ -83,3 +83,7 @@ export class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  initialValue: PropTypes.number.isRequired,
+};
